@@ -12,12 +12,12 @@ class HelloState extends BlocState {
   final Failure? error;
   final HelloStatus status;
 
-  const HelloState({
+  HelloState({
     this.hello,
     this.error,
     required this.status,
   }) : assert(
-          (status == HelloStatus.error && error != null),
+          (status == HelloStatus.error) ? error != null : true,
           'Error status must have a corresponding error object',
         );
 

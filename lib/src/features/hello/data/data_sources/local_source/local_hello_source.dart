@@ -10,7 +10,7 @@ class LocalHelloSource
 
   LocalHelloSource._({
     Box<String>? box,
-  }) : _box = box ?? Hive.box(StorageKey.hello.box);
+  }) : _box = box ?? Hive.box<String>(StorageKey.hello.box);
 
   LocalHelloSource.test({
     required Box<String> moxBox,
@@ -36,5 +36,12 @@ class LocalHelloSource
 
   Future<void> _storeHelloData(String value) async {
     await _box.put(StorageKey.hello.key, value);
+  }
+
+  @override
+  Future<void> initStorage() async {
+    await Hive.initFlutter();
+    await Hive.openBox<String>(StorageKey.hello.box);
+    print('box opened');
   }
 }

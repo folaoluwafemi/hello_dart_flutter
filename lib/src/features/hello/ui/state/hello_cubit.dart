@@ -4,7 +4,7 @@ import 'package:hello_dart_flutter/src/utils/utils_barrel.dart';
 
 part 'hello_state.dart';
 
-class HelloCubit extends Cubit<HelloState> {
+class HelloCubit extends Cubit<HelloState> with BlocErrorHandlerMixin {
   final HelloRepoInterface _repo;
 
   HelloCubit({HelloRepoInterface? repo})
@@ -20,6 +20,15 @@ class HelloCubit extends Cubit<HelloState> {
     );
   }
 
+  Future<void> _saveHello(String helloData) async {
+    state.copyWith(status: HelloStatus.loading);
+    await _repo.saveHello(helloData);
+    state.copyWith(
+      status: HelloStatus.success,
+      hello: helloData,
+    );
+  }
+
   Future<void> fetchHello() async {
     state.copyWith(status: HelloStatus.loading);
     final String? hello = await _repo.fetchHello();
@@ -27,5 +36,18 @@ class HelloCubit extends Cubit<HelloState> {
       status: HelloStatus.success,
       hello: hello,
     );
+  }
+  Future<void> _fetchHello() async {
+    state.copyWith(status: HelloStatus.loading);
+    final String? hello = await _repo.fetchHello();
+    state.copyWith(
+      status: HelloStatus.success,
+      hello: hello,
+    );
+  }
+
+
+  void generalErrorHandler(Failure error){
+    emit(state.copyWith(error: error, status: HelloStatus.error));
   }
 }
