@@ -11,14 +11,10 @@ class HelloCubit extends Cubit<HelloState> with BlocErrorHandlerMixin {
       : _repo = repo ?? HelloRepository(),
         super(HelloState(status: HelloStatus.initial));
 
-  Future<void> saveHello(String helloData) async {
-    state.copyWith(status: HelloStatus.loading);
-    await _repo.saveHello(helloData);
-    state.copyWith(
-      status: HelloStatus.success,
-      hello: helloData,
-    );
-  }
+  Future<void> saveHello(String helloData) => handleError(
+        _saveHello(helloData),
+        catcher: _generalErrorHandler,
+      );
 
   Future<void> _saveHello(String helloData) async {
     state.copyWith(status: HelloStatus.loading);
@@ -29,14 +25,11 @@ class HelloCubit extends Cubit<HelloState> with BlocErrorHandlerMixin {
     );
   }
 
-  Future<void> fetchHello() async {
-    state.copyWith(status: HelloStatus.loading);
-    final String? hello = await _repo.fetchHello();
-    state.copyWith(
-      status: HelloStatus.success,
-      hello: hello,
-    );
-  }
+  Future<void> fetchHello() => handleError(
+        _fetchHello(),
+        catcher: _generalErrorHandler,
+      );
+
   Future<void> _fetchHello() async {
     state.copyWith(status: HelloStatus.loading);
     final String? hello = await _repo.fetchHello();
@@ -46,8 +39,7 @@ class HelloCubit extends Cubit<HelloState> with BlocErrorHandlerMixin {
     );
   }
 
-
-  void generalErrorHandler(Failure error){
+  void _generalErrorHandler(Failure error) {
     emit(state.copyWith(error: error, status: HelloStatus.error));
   }
 }

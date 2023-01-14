@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HelloCubit>(
-      create: (context) => HelloCubit(),
+      create: (context) => HelloCubit()..fetchHello(),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -44,8 +44,10 @@ class _HelloViewState extends State<HelloView> {
               builder: (context, state) {
                 if (state.status == HelloStatus.error) {
                   return Text(
-                    state.error?.message ?? '',
-                    style: context.theme.textTheme.bodyMedium?.withSize(18),
+                    state.error?.message ?? 'An error occurred',
+                    style: context.theme.textTheme.bodyMedium
+                        ?.withSize(15)
+                        .withColor(Colors.red),
                   );
                 }
                 return Text(
@@ -56,10 +58,11 @@ class _HelloViewState extends State<HelloView> {
             ),
             Row(
               children: [
-                const Flexible(
+                Flexible(
                   child: TextField(
+                    controller: helloFieldController,
                     decoration: InputDecoration(
-                      hintText: 'Enter a hello and send'
+                      hintText: 'Enter a hello and send',
                     ),
                   ),
                 ),
@@ -91,5 +94,17 @@ class _HelloViewState extends State<HelloView> {
     );
   }
 
-  void onSendPressed() {}
+  final TextEditingController helloFieldController = TextEditingController();
+
+  @override
+  void dispose() {
+    helloFieldController.dispose();
+    super.dispose();
+  }
+
+  void onSendPressed() {
+    final String helloText = helloFieldController.text;
+    helloFieldController.clear();
+    context.read<HelloCubit>().saveHello(helloText);
+  }
 }

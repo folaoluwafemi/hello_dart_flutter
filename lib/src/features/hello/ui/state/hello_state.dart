@@ -12,7 +12,7 @@ class HelloState extends BlocState {
   final Failure? error;
   final HelloStatus status;
 
-  HelloState({
+  const HelloState({
     this.hello,
     this.error,
     required this.status,
