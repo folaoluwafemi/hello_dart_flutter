@@ -19,9 +19,11 @@ class Failure implements Exception {
   Failure copyWith({
     final String? message,
     final Exception? exception,
+    final StackTrace? stackTrace,
   }) {
     return Failure(
       message: message ?? this.message,
+      stackTrace: stackTrace ?? _stackTrace,
       exception: exception ?? this.exception,
     );
   }

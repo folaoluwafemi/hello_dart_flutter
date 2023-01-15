@@ -20,6 +20,8 @@ mixin BlocErrorHandlerMixin implements ErrorHandler {
       }
       debugPrint(failure.toString());
 
+      print('current stackTrace: ${StackTrace.current} \n\nError stackTrace: $stackTrace');
+
       return catcher != null ? catcher.call(failure) : Future<T>.error(failure);
     }
   }

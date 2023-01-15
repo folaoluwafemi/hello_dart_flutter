@@ -1,0 +1,52 @@
+{
+  "_buildCommand2" : {
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : false,
+    "targets" : null
+  },
+  "buildCommand" : "build",
+  "configuredTargets" : [
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e989d8b2146a8145768218b852a9444a007"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98312b4bc59bbbe2c06c205bf4da6737f5"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e981373b3abfbb3cf79621c62e43ea4b317"
+    }
+  ],
+  "containerPath" : "/Users/mac/AndroidStudioProjects/hello_dart_flutter/macos/Pods/Pods.xcodeproj",
+  "continueBuildingAfterErrors" : true,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "",
+      "buildProductsPath" : "",
+      "derivedDataPath" : "/Users/mac/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/mac/Library/Developer/Xcode/DerivedData/Pods-bnnxxqrsvfjjmoeurnejtyeksnyi/Index/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/mac/Library/Developer/Xcode/DerivedData/Pods-bnnxxqrsvfjjmoeurnejtyeksnyi/Index/PrecompiledHeaders",
+      "pchPath" : ""
+    },
+    "configurationName" : "Release",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "schemeCommand2" : "launch",
+  "shouldCollectMetrics" : false,
+  "showNonLoggedProgress" : true,
+  "useDryRun" : true,
+  "useImplicitDependencies" : false,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : false
+}

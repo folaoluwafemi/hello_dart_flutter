@@ -28,8 +28,11 @@ mixin DioErrorHandlerMixin implements ErrorHandler {
       } else if (e.type == DioErrorType.sendTimeout) {
         debugPrint('Send Time out');
         failure = failure.copyWith(message: ErrorMessages.sendTimeOut);
+      }else if (e.type == DioErrorType.other) {
+        debugPrint('Send Time out');
+        failure = failure.copyWith(message: e.message, stackTrace: stackTrace);
       }
-      debugPrint(failure.toString());
+      debugPrint('so is a dio error: $e, current stacktrace: $stackTrace\n\n\nfailure:${failure.toString()}');
       return catcher?.call(failure) ?? Future.error(failure);
     } catch (e, stackTrace) {
       late Failure failure;
@@ -39,7 +42,7 @@ mixin DioErrorHandlerMixin implements ErrorHandler {
         failure = e;
       }
 
-      debugPrint(failure.toString());
+      debugPrint('Failure: ${failure.toString()}');
 
       return catcher?.call(failure) ?? Future.error(failure);
     }
