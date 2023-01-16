@@ -1,6 +1,6 @@
 # hello_dart_flutter
 
-A new Flutter project.
+Hello Dart Flutter is a relatively simple application that allows you to enter a hello text and save it both locally and on the server.
 
 ## Getting Started
 
